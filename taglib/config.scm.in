@@ -1,0 +1,5 @@
+(define-module (taglib config)
+  #:export     (*taglib-path*))
+
+(define *taglib-path* "@taglibpath@")
+;(define *taglib-documentation-path* "@taglibcdocumentationpath@")
