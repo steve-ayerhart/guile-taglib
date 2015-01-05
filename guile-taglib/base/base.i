@@ -23,8 +23,7 @@ namespace TagLib {
     enum Type { Latin1 = 0, UTF16 = 1, UTF16BE = 2, UTF8 = 3, UTF16LE = 4 };
   };
 
-  class FileName;
-
+  typedef const char* FileName;
   typedef wchar_t wchar;
   typedef unsigned char uchar;
   typedef unsigned int uint;
