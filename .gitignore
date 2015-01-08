@@ -31,3 +31,4 @@ Makefile.in
 /taglib/*.scm
 /config.h
 /.DS_Store
+/taglib/.DS_Store

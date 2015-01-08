@@ -1,7 +1,4 @@
-%scheme {
-  (use-modules (taglib config))
-  (dynamic-call "scm_init_taglib_base_module" (dynamic-link *taglib-path*))
-}
+%module base
 
 %{
 #include <taglib/taglib.h>
@@ -10,20 +7,34 @@
 #include <taglib/tlist.h>
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
+#include <taglib/audioproperties.h>
+#include "helpers.h"
+
 %}
 
-%include "../includes.i"
+#define TAGLIB_EXPORT
+#define TAGLIB_IGNORE_MISSING_DESTRUCTOR
+
+
+%nodefaultctor AudioProperties;
 
 namespace TagLib {
   class StringList;
   class ByteVector;
+  class IOStream;
 
   class String {
   public:
     enum Type { Latin1 = 0, UTF16 = 1, UTF16BE = 2, UTF8 = 3, UTF16LE = 4 };
   };
 
-  typedef const char* FileName;
+  class AudioProperties {
+  public:
+    enum ReadStyle { Fast, Average, Accurate };
+  };
+
+  class FileName;
+
   typedef wchar_t wchar;
   typedef unsigned char uchar;
   typedef unsigned int uint;
@@ -59,6 +70,13 @@ namespace TagLib {
 }
 
 %apply TagLib::StringList { TagLib::StringList &, const TagLib::StringList & };
+
+%typemap(out) TagLib::FileName {
+  $result = taglib_filename_to_guile_string($1);
+}
+%typemap(in) TagLib::Filename {
+  $1 = guile_string_to_taglib_filename($input);
+}
 
 %ignore TagLib::List::operator[];
 %ignore Taglib::List::operator=;
