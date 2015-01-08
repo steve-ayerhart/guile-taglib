@@ -26,7 +26,6 @@ Makefile.in
 /stamp-h1
 /config.h.in~
 /build-aux/
-*.cxx
 /taglib/*.scm
 /config.h
 /.DS_Store
@@ -37,3 +36,5 @@ Makefile.in
 /m4/ltversion.m4
 /m4/lt~obsolete.m4
 /m4/pkg.m4
+/guile-taglib/base.cxx
+/guile-taglib/flac.cxx
